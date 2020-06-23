@@ -12,3 +12,12 @@ let reducers: ReducersMapObject = {
 	profile
 }
 
+type CombinedState = {
+	[key in keyof typeof reducers]: ReturnType<typeof reducers[key]>
+}
+
+let reducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducers);
+
+
+export { CombinedState }
+export default reducer;

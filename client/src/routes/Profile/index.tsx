@@ -1,11 +1,16 @@
-import { AnyAction } from 'redux';
-export interface ProfilState {}
+import React, { PropsWithChildren } from 'react'
+import { connect } from 'react-redux'
+import { RouteComponentProps } from "react-router-dom";
 
-let initialState: ProfilState = {}
+interface Params {}
 
-export default function (state: ProfilState = initialState, action: AnyAction): ProfilState {
-	switch(action.type) {
-		default:
-			return state
-	}
+type Props = PropsWithChildren<RouteComponentProps<Params>>
+function Profile(props: Props) {
+	return (
+		<div>
+			Profile
+		</div>
+	)
 }
+
+export default connect()(Profile)
