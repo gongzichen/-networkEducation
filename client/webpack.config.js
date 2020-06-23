@@ -31,7 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.(j|t)sx?$/,
-        loader: "tx-loader", // 使用ts-loader 转译
+        loader: "ts-loader", // 使用ts-loader 转译
         options: {
           transpileOnly: true, // 是否只转译
           // TypeScript 将 TS 代码编译到 JS 的功能，其实也是通过内置的转换器实现的，从 TS 2.3 开始，TS 将此功能开放，允许开发者编写自定义的转换器。
@@ -59,7 +59,7 @@ module.exports = {
             options: { importLoaders: 0 }, // 在css-loader后指定几个loader处理@import 进来的资源 0 个的时候没有，1个的时候使用 postcss-loader,2个使用 postcss-loader, sass-loader
           },
           {
-            loadeer: "postcss-loader",
+            loader: "postcss-loader",
             options: {
               plugins: [require("autoprefixer")],
             },
@@ -82,7 +82,7 @@ module.exports = {
             options: { importLoaders: 0 }, // 在css-loader后指定几个loader处理@import 进来的资源 0 个的时候没有，1个的时候使用 postcss-loader,2个使用 postcss-loader, sass-loader
           },
           {
-            loadeer: "postcss-loader",
+            loader: "postcss-loader",
             options: {
               plugins: [require("autoprefixer")],
             },
