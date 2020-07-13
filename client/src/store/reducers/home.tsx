@@ -1,13 +1,21 @@
 import { AnyAction } from "redux";
-export interface HomeState {}
+import * as TYPES from '../action-types'
 
-let initialState: HomeState = {};
+export interface HomeState {
+  currentCategory: string
+}
+
+let initialState: HomeState = {
+  currentCategory: 'all'  // 默认为全部分类
+};
 
 export default function (
   state: HomeState = initialState,
   action: AnyAction
 ): HomeState {
   switch (action.type) {
+    case TYPES.SET_CURRENT_CATEGORY: // 修改当前分类
+      return {...state, currentCategory: action.payload}
     default:
       return state;
   }

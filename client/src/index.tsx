@@ -12,6 +12,7 @@ import Mine from './routes/Mine'; // 我的课程
 import Profile from './routes/Profile'; // 我的课程
 import { ConnectedRouter } from 'connected-react-router' // redux 绑定路由
 import history from './store/history'
+import 'lib-flexible'
 ReactDom.render(
 	<Provider store={store}>
 		<ConnectedRouter history={history}>
@@ -26,7 +27,7 @@ ReactDom.render(
 				</main>
 				<Tabs />
 			</ConfigProvider>
-		</ConnectedRouter>
+		</ConnectedRouter>   
 	</Provider>,
 	document.getElementById("root")
 );
