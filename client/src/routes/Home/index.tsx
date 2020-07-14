@@ -24,6 +24,7 @@ function Home(props: Props) {
 }
 
 
+
 let mapStateToProps = (state: CombinedState): HomeState => state.home;
 export default connect(
     mapStateToProps,
