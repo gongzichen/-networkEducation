@@ -8,7 +8,7 @@ type Props = PropsWithChildren<RouteComponentProps<Params>>
 function Profile(props: Props) {
 	return (
 		<div>
-			Profile
+			Profileasdadada
 		</div>
 	)
 }
