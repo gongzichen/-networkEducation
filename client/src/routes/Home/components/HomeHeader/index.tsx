@@ -44,10 +44,10 @@ function HomeHeader(props: Props) {
 	}
 	
 	return (
-		<header getInputClassName="home-header">
+		<header className="home-header">
 			<div className="logo-header">
 				<img src={logo} />
-				<BarsOutlined onClick={() => setIsMenuVisible(!isMenuVisible)} />
+				<BarsOutlined className="right-icon" onClick={() => setIsMenuVisible(!isMenuVisible)} />
 			</div>
 			<Transition in={isMenuVisible} timeout={duration}>
 				{
@@ -55,10 +55,10 @@ function HomeHeader(props: Props) {
 						<ul
 							className="category"
 							onClick={setCurrentCategory}
-							style=({
-								...defaultStyle,
-								...TransitionStyles[state]
-							})
+						 	style={{
+                                ...defaultStyle,
+                                ...TransitionStyles[state]
+                            }}
 						>
 							 <li data-category="all" className={classnames({ active: props.currentCategory === 'all' })}>全部课程</li>
 							 <li data-category="react" className={classnames({active: props.currentCategory === 'react'})}>react课程</li>
@@ -70,3 +70,5 @@ function HomeHeader(props: Props) {
 		</header>
 	)
 }
+
+export default HomeHeader;

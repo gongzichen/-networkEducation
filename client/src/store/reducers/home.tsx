@@ -9,6 +9,7 @@ let initialState: HomeState = {
   currentCategory: 'all'  // 默认为全部分类
 };
 
+
 export default function (
   state: HomeState = initialState,
   action: AnyAction

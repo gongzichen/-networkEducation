@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import actions from '@/store/actions/home'
 import HomeHeader from './components/HomeHeader'
-import {CombinedState} from '@/store/reducers/home'
+import { CombinedState } from '@/store/reducers/index'
 import { HomeState } from '@/store/reducers/home';
 import './index.less';
 interface Params {}
@@ -16,8 +16,8 @@ function Home(props: Props) {
 	return (
 		<div>
 			 <HomeHeader
-               currentCategory={props.currentCategory}
-                setCurrentCategory={props.setCurrentCategory}
+                currentCategory={props.currentCategory}
+            	setCurrentCategory={props.setCurrentCategory}
             />
 		</div>
 	)
