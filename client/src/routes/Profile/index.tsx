@@ -7,10 +7,13 @@ interface Params {}
 type Props = PropsWithChildren<RouteComponentProps<Params>>
 function Profile(props: Props) {
 	return (
-		<div>
-			Profileasdadada
-		</div>
-	)
+    <div>
+      ProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadada
+      ProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadada
+      ProfileasdadadaProfileasdadadaProfileasdadadaProfileasdadada
+			demo
+    </div>
+  );
 }
 
 export default connect()(Profile)
