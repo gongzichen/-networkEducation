@@ -1,42 +1,28 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "lib": [
-      "dom",
-      "es6",
-      "es2017",
-      "esnext.asynciterable"
-		],
-		"scripts": {
-			"build": "tsc",
-			"start": "cross-env NODE_ENV=development ts-node-dev --respawn src/index.ts",
-			"dev": "cross-env NODE_ENV=production nodemon --exec ts-node --files src/index.ts"
-		},
-    "sourceMap": true,
-    "outDir": "./dist",
-    "moduleResolution": "node",
-    "removeComments": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+    "outDir": "./dist/", // 重定向输出目录
+    "sourceMap": true, // 生成相应的 .map文件
+    "noImplicitAny": false, // 在表达式和声明上有隐含的 any类型时报错。（默认为false，个人建议也为false，可以兼容之前的js代码，这里改为true是为了我自己检测哪些类型需要处理）
+    "module": "commonjs", // 模块引入方式
+    "target": "es6", // 指定ECMAScript目标版本
+    "moduleResolution": "node", // 决定如何处理模块
+    "strict": false,
     "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "baseUrl": "."
+    "baseUrl": ".", // 解析非相对模块的基地址
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "lib": [
+      "esnext",
+      "dom"
+    ], // 编译过程中需要引入的库文件的列表。
+    "skipLibCheck": true, //忽略所有库中的声明文件（ *.d.ts）的类型检查。
+    "jsx": "react" // 在 .tsx文件里支持JSX
   },
-  "exclude": [
-    "node_modules"
-  ],
   "include": [
-    "./src/**/*.tsx",
-    "./src/**/*.ts"
+    "./src/**/*", // 这个表示处理根目录的src目录下所有的.ts和.tsx文件，并不是所有文件
+    "./typings/*"
   ]
 }

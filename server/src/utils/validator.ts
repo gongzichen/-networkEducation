@@ -30,12 +30,11 @@ export const validateRegisterInput = (
 	if (!validator.equals(password, confirmPassword)) {
 		errors.confirmPassword = '确认密码和密码不相等'
 	}
-	if (email == undefined || validator.isEmpry(password)) {
+	if (email == undefined || validator.isEmpty(password)) {
 		errors.email = "邮箱不能为空"
 	}
-	if (!validator.isEmail(email) {
+	if (!validator.isEmail(email)) {
 		errors.email = "邮箱格式必须合法"
-	})
-
+	}
 	return {errors, valid: Object.keys(errors).length == 0}
 }

@@ -1,7 +1,6 @@
 import { IUserDocument } from '../models/user'
-import { IUserDcoument } from '../models/user'
 
-declare.global {
+declare global {
 	namespace Express {
 		export interface Request {
 			currentUser?: IUserDocument | null;

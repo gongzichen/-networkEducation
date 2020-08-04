@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from 'express'
 import { validateRegisterInput } from '../utils/validator'
 import HttpException from '../exceptions/HttpException'
 import { UNPROCESSABLE_ENTITY, UNAUTHORIZED } from "http-status-codes";
-import { IUserDocument, User } from '../modles/user'
-import { UserPayload } from '../typins/jwt'
+import { IUserDocument, User } from '../models/user'
+import { UserPayload } from '../typins/jwt';
+import jwt from 'jsonwebtoken'
+
 export const validate = async (req: Request, res: Response, next: NextFunction) => {
 	const authorization = req.headers['authorization']
-
 	if (authorization) {
 		const token = authorization.split(' ')[1]
 		if (token) {
@@ -33,10 +34,24 @@ export const validate = async (req: Request, res: Response, next: NextFunction) 
 	}
 }
 
-
 export const register = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-
+		let { username, password, confirmPassword, email, address } = req.body
+		const { valid, errors } = validateRegisterInput(username, password, confirmPassword, email)
+		if (!valid) {
+			throw new HttpException(UNPROCESSABLE_ENTITY, `参数验证失败`, errors)
+		}
+		let user: IUserDocument = new User({ username, email, password, address })
+		let oldUser: IUserDocument | null = await User.findOne({ username: user.username })
+		if (oldUser) {
+			throw new HttpException(UNPROCESSABLE_ENTITY, `用户名重复`)
+		}
+		await user.save()
+		let token = user.generateToken()
+		res.json({
+			success: true,
+			data: { token }
+		})
 	} catch (error) {
 		next(error)
 	}
@@ -68,6 +83,6 @@ export const uploadAvatar = async (req: Request, res: Response, _next: NextFunct
 	let { userId } = req.body
 	let domain = process.env.DOMAIN || `${req.protocol}://${req.headers.host}`
 	let avatar = `${domain}/upload/${req.file.filename}`
-	await User,updateOne({_id: userId}, { avatar }) 
+	await User.updateOne({_id: userId}, { avatar }) 
 	res.send({success: true, data: avatar})
 }

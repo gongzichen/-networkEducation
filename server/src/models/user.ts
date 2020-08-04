@@ -1,9 +1,12 @@
 import mongoose, {Schema, Model, Document, HookNextFunction } from 'mongoose'
 import validator from 'validator'
 import jwt from 'jsonwebtoken'
-import { UserPayload } from '../typings/jwt'
-import bcrypt from "bcryptjs"
+import { UserPayload } from '../typins/jwt'
+import bcrypt from "bcryptjs" // 加|解 密
 
+/**
+ * 创建文档对象接口
+ */
 export interface IUserDocument extends Document {
 	username: string,
 	password: string,
@@ -13,6 +16,12 @@ export interface IUserDocument extends Document {
 	_doc: IUserDocument
 }
 
+
+/**
+ * 创建集合
+ *
+ * @return  {[type]}  [return description]
+ */
 const UserSchema: Schema<IUserDocument> = new Schema({
 	username: {
 		type: String,
@@ -43,7 +52,11 @@ const UserSchema: Schema<IUserDocument> = new Schema({
 	}
 })
 
-
+/**
+ * 获取文档
+ *
+ * @return  {string}  [return description]
+ */
 UserSchema.methods.generateToken = function (): string {
 	let payload: UserPayload = ({id: this._id})
 	return jwt.sign(payload, process.env.JWT_SECRET_KEY!, { expiresIn: '1h'})
@@ -65,7 +78,7 @@ UserSchema.pre<IUserDocument>('save', async function (next: HookNextFunction) {
 UserSchema.static('login', async function (this: any, username: string, password: string): Promise<IUserDocument | null> {
 	let user: IUserDocument | null = await this.model('User').findOne({ username })
 	if (user) {
-		const matched = await bcrype.compare(password, user.password);
+		const matched = await bcrypt.compare(password, user.password);
 		if (matched) {
 			return user;
 		} else {
@@ -80,4 +93,4 @@ interface IUserModel<T extends Document> extends Model<T> {
 }
 
 
-exports const User: IUsermODEL<IUserDocument> = mongoose.model<IUserDocument, IUserModel<IUserDocument>>('user', UserSchema)
+export const User: IUserModel<IUserDocument> = mongoose.model<IUserDocument, IUserModel<IUserDocument>>('user', UserSchema)

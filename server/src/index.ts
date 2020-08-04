@@ -1,5 +1,5 @@
-import express, {Express, Request, Response, NextFunction} from 'express'
-import mongoose from "mongoose"
+import express, { Express, Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
 import HttpException from './exceptions/HttpException' // http异常处理
 import cors from 'cors'  // 跨域
 import morgan from 'morgan' // 打印http请求日记
@@ -17,8 +17,9 @@ const storage = multer.diskStorage({
   },
 })
 
+
 const upload = multer({ storage })
-const app: Express = express()
+const app = express()
 
 app.use(morgan('dev'))
 app.use(cors()) // 跨域
@@ -29,11 +30,10 @@ app.get('/', (_req: Request, res: Response) => {
 	res.json({success: true, message: 'hello world'})
 })
 
-app.get('/user/validate',userController.validate)
-app.post('/user/register', userController.regiser)
+app.get('/user/validate', userController.validate)
+app.post('/user/register', userController.register)
 app.post('/user/login', userController.login)
 app.post('/user/uploadAvatar', upload.single('avatar'), userController.uploadAvatar)
-
 app.use((_req: Request, _res: Response, next: NextFunction) => {
 	const error: HttpException = new HttpException(404, 'Route not found')
 	next(error)
@@ -43,11 +43,21 @@ app.use(errorMiddleware)
 
 const PORT: number = (process.env.PORT && parseInt(process.env.PORT)) || 8000;
 
-(async function() {
-	mongoose.set('useNewUrlParser', true)
-	mongoose.set('useUnifiedTopology', true)
-	await mongoose.connect("mongodb://localhost/mongoose")
-	app.listen(PORT, ()=> {
-		console.log(`Running on http://localhost:${PORT}`)
-	})
-})()
+let connect = mongoose.createConnection( 'mongodb://localhost/27017', {
+	/* 使用新的url解析 */
+	'useNewUrlParser': true,
+	/* 新的服务器发现和监事引擎 */
+	'useUnifiedTopology': true
+})
+
+connect.on('open', () => {
+	console.log('mongodb连接成功')
+})
+
+connect.on('error', () => {
+	console.log('mongodb连接失败')
+})
+
+app.listen(PORT, ()=> {
+	console.log(`Running on http://localhost:${PORT}`)
+})
