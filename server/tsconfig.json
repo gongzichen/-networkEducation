@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
-    "outDir": "./dist/", // 重定向输出目录
+    // "outDir": "", // 重定向输出目录
     "sourceMap": true, // 生成相应的 .map文件
     "noImplicitAny": false, // 在表达式和声明上有隐含的 any类型时报错。（默认为false，个人建议也为false，可以兼容之前的js代码，这里改为true是为了我自己检测哪些类型需要处理）
     "module": "commonjs", // 模块引入方式

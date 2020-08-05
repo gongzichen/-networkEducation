@@ -8,7 +8,6 @@ import actions from "../../store/actions/profile";
 import { AxiosError } from "axios";
 import NavHeader from "../../components/NavHeader";
 import { RouteComponentProps } from "react-router-dom";
-import { Descriptions, message } from 'antd';
 
 interface Params {}
 
