@@ -1,7 +1,6 @@
 import validator from 'validator' // 字符串校验
 import  { IUserDocument} from '../models/user'
 
-
 export interface RegisterInput extends Partial<IUserDocument> {
 	confirmPassword?: string
 }
