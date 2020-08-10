@@ -3,7 +3,7 @@ import logo from '@/assets/images/logo.png' // ts默认不支持png格式。 需
 import classnames from 'classnames';
 import {Transition} from 'react-transition-group' // react 过度动画
 import './index.less'
-import { getInputClassName } from 'antd/lib/input/Input'
+// import { getInputClassName } from 'antd/lib/input/Input'
 import { BarsOutlined } from '@ant-design/icons'
 const duration = 1000
 

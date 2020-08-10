@@ -12,7 +12,6 @@ import { RouteComponentProps } from "react-router-dom";
 
 interface Params {}
 
-
 type Props = PropsWithChildren<StateProps & Dispatch & RouterProps>
 
 function Profile(props: Props) {
