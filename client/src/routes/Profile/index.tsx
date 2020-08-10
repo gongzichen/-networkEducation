@@ -1,14 +1,15 @@
-import React, { Dispatch, PropsWithChildren, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { PropsWithChildren, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { AxiosError } from "axios";
+import { RouteComponentProps } from "react-router";
 import { Descriptions, Button, Alert, message } from "antd";
 import { CombinedState } from '../../store/reducers'
-// import { ProfileState } from '../../store/profile'
+import { ProfileState } from '../../store/profile'
 import LOGIN_TYPES from '../../../typings/login-types'
-// import actions from "../../store/actions/profile";
+import actions from "../../store/actions/profile";
 
 import NavHeader from "../../components/NavHeader";
-import { RouteComponentProps } from "react-router-dom";
+
 
 interface Params {}
 
