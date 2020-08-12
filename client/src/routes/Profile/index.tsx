@@ -13,7 +13,7 @@ import NavHeader from "../../components/NavHeader";
 
 interface Params {}
 
-type Props = PropsWithChildren<StateProps & Dispatch & RouterProps>
+type Props = PropsWithChildren<T>
 
 function Profile(props: Props) {
   /**
