@@ -55,7 +55,7 @@ function Profile(props: Props) {
   }
   return (
     <section>
-       <NavHeader history={props.history}>个人中心</NavHeader>
+      <NavHeader history={props.history}>个人中心</NavHeader>
        {content}
     </section>
   )
