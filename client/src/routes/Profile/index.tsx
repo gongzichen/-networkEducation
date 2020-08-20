@@ -1,19 +1,20 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { AxiosError } from "axios";
-import { RouteComponentProps } from "react-router";
-import { Descriptions, Button, Alert, message } from "antd";
 import { CombinedState } from '../../store/reducers'
 import { ProfileState } from '../../store/profile'
-import LOGIN_TYPES from '../../../typings/login-types'
 import actions from "../../store/actions/profile";
-
+import { RouteComponentProps } from "react-router";
+import { Descriptions, Button, Alert, message } from "antd";
+import LOGIN_TYPES from '../../../typings/login-types'
 import NavHeader from "../../components/NavHeader";
+import { AxiosError } from "axios";
 
 
+type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = typeof actions
 interface Params {}
-
-type Props = PropsWithChildren<T>
+type RouteProps = RouteComponentProps<Params>
+type Props = PropsWithChildren<StateProps & DispatchProps & RouteProps>
 
 function Profile(props: Props) {
   /**
@@ -31,7 +32,11 @@ function Profile(props: Props) {
     contnet = (
       <div className="user-info">
         <Descriptions title="当前登入用户">
+          <Descriptions.Item label="用户名">cgong</Descriptions.Item>
+          <Descriptions.Item label="手机号">158181*****</Descriptions.Item>
+          <Descriptions.Item label="邮箱">12639179@qq.com</Descriptions.Item>
         </Descriptions>
+        <Button type="primary">退出登入</Button>
       </div>
     )
   } else {
