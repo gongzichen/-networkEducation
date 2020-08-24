@@ -98,3 +98,6 @@ function Cart(props: Props) {
 		</>
 	)
 }
+
+
+export default connect(Cart());

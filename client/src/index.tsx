@@ -12,26 +12,31 @@ import Mine from './routes/Mine'; // 我的课程
 import Profile from './routes/Profile'; // 我的课程
 import login from './routes/Login'; // 登入
 import Detail from './routes/Detail'; // 详情
+import Cart from './routes/Cart'; // 购物车
+import { PersistGate } from "redux-persist/integration/react";
 import { ConnectedRouter } from 'connected-react-router' // redux 绑定路由
 import history from './store/history'
 import 'lib-flexible'
 ReactDom.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <ConfigProvider locale={zh_CN}>
-        <main className="main-container">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/mine" component={Mine} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/login" component={login} />
-            <Route path="/detaul/:id" component={Detail} />
-            <Redirect to="/" />
-          </Switch>
-        </main>
-        <Tabs />
-      </ConfigProvider>
-    </ConnectedRouter>
+    <PersistGate loading={null} presistor={persistor}>
+      <ConnectedRouter history={history}>
+        <ConfigProvider locale={zh_CN}>
+          <main className="main-container">
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/mine" component={Mine} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/login" component={login} />
+              <Route path="/detaul/:id" component={Detail} />
+              <Route path="/cart" component={Cart} />
+              <Redirect to="/" />
+            </Switch>
+          </main>
+          <Tabs />
+        </ConfigProvider>
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
