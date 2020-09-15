@@ -12,7 +12,7 @@ import Mine from '@/routes/Mine';
 import Profile from '@/routes/Profile';
 import login from '@/routes/Login';
 // import Detail from './routes/Detail'; // 详情
-// import Cart from './routes/Cart'; // 购物车
+import Cart from '@/routes/Cart'; // 购物车
 // import { PersistGate } from "redux-persist/integration/react";
 import { ConnectedRouter } from 'connected-react-router' // redux 绑定路由
 import history from './store/history'
@@ -29,7 +29,7 @@ ReactDom.render(
               <Route path="/profile" component={Profile} />
               <Route path="/login" component={login} />
               {/* <Route path="/detail/:id" component={Detail} /> */}
-              {/* <Route path="/cart" component={Cart} /> */}
+              <Route path="/cart" component={Cart} />
               <Redirect to="/" />
             </Switch>
           </main>

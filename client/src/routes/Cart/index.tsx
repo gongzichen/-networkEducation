@@ -59,23 +59,25 @@ function Cart(props: Props) {
 		{
 			title: '操作',
 			render: (val: any, row: CartItem) => (
-		// 		<Popconfirm
-		// 			title="是否要删除商品?"
-		// 			onConfirm={() => props.removeCartItem(row.lesson.id)}
-		// 			okText="是"
-		// 			cancelText="否"
-		// 		>
-		// 			<Button size="small" type="primary">删除<Button/>
-		// 		</Popconfirm>
+				<Popconfirm
+					title="是否要删除商品?"
+					onConfirm={() => props.removeCartItem(row.lesson.id)}
+					okText="是"
+					cancelText="否"
+				>
+					<Button size="small" type="primary">删除<Button/>
+				</Popconfirm>
 			)
 		}
 	];
-	const rowSelection = {
+
+	{/* const rowSelection = {
 		selectedRowKeys: props.cart.filter((item: CartItem) => item.checked ).map((item: CartItem) => item.lesson.id),
 		onChange: (selectedRowKey: string[]) => {
 			props.changeCheckedCartItems(selectedRowKeys)
 		} 
 	};
+
 	let totalCount:  number = props.cart.filter((item: CartItem) => item.checked).reduce((total: number, item: CartItem) => total + item.count, 0);
 	let totalPrice = props.cart.filter((item.CartItem) => )
 
@@ -96,7 +98,7 @@ function Cart(props: Props) {
 				</Col>
 			</Row>
 		</>
-	)
+	) */}
 }
 
 
