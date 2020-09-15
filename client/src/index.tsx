@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Switch, Route, Redirect } from 'react-router-dom'; // 路由组件
-import { Provider } from 'react-redux'; // 负责把属性中的store 传递给子组件
-import store from  './store';  // 引入仓库
-import { ConfigProvider } from 'antd'; // 配置
-import zh_CN from 'antd/lib/locale-provider/zh_CN'; // 国际化中文
-import './assets/css/common.less'; // 通用样式
-import Tabs from './components/Tabs' // 底部导航标签 
-import Home from './routes/Home'; // 首页
-import Mine from './routes/Mine'; // 我的课程
-import Profile from './routes/Profile'; // 我的课程
-import login from './routes/Login'; // 登入
-import Detail from './routes/Detail'; // 详情
-import Cart from './routes/Cart'; // 购物车
-import { PersistGate } from "redux-persist/integration/react";
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux'; 
+import store from  './store'; 
+import { ConfigProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import '@/assets/css/common.less';
+import Tabs from '@/components/Tabs'
+import Home from '@/routes/Home';
+import Mine from '@/routes/Mine';
+import Profile from '@/routes/Profile';
+import login from '@/routes/Login';
+// import Detail from './routes/Detail'; // 详情
+// import Cart from './routes/Cart'; // 购物车
+// import { PersistGate } from "redux-persist/integration/react";
 import { ConnectedRouter } from 'connected-react-router' // redux 绑定路由
 import history from './store/history'
 import 'lib-flexible'
 ReactDom.render(
   <Provider store={store}>
-    <PersistGate loading={null} presistor={persistor}>
+    {/* <PersistGate loading={null} presistor={PersistGate}> */}
       <ConnectedRouter history={history}>
         <ConfigProvider locale={zh_CN}>
           <main className="main-container">
@@ -28,15 +28,15 @@ ReactDom.render(
               <Route path="/mine" component={Mine} />
               <Route path="/profile" component={Profile} />
               <Route path="/login" component={login} />
-              <Route path="/detaul/:id" component={Detail} />
-              <Route path="/cart" component={Cart} />
+              {/* <Route path="/detail/:id" component={Detail} /> */}
+              {/* <Route path="/cart" component={Cart} /> */}
               <Redirect to="/" />
             </Switch>
           </main>
           <Tabs />
         </ConfigProvider>
       </ConnectedRouter>
-    </PersistGate>
+    {/* </PersistGate> */}
   </Provider>,
   document.getElementById("root")
 );

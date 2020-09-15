@@ -61,8 +61,8 @@ function HomeHeader(props: Props) {
                             }}
 						>
 							 <li data-category="all" className={classnames({ active: props.currentCategory === 'all' })}>全部课程</li>
-							 <li data-category="react" className={classnames({active: props.currentCategory === 'react'})}>react课程</li>
-							  <li data-category="vue" className={classnames({active: props.currentCategory === 'vue'})}>vue课程</li>
+							<li data-category="react" className={classnames({active: props.currentCategory === 'react'})}>react课程</li>
+							<li data-category="vue" className={classnames({active: props.currentCategory === 'vue'})}>vue课程</li>
 						</ul>
 					)
 				}

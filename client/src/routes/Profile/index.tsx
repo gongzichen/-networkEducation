@@ -1,17 +1,17 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { CombinedState } from '../../store/reducers'
-import { ProfileState } from '../../store/profile'
-import actions from "../../store/actions/profile";
+import { CombinedState } from '@/store/reducers'
+// import { ProfileState } from '../../store/actions'
+// import actions from "@/store/actions/profile";
 import { RouteComponentProps } from "react-router";
 import { Descriptions, Button, Alert, message } from "antd";
 import LOGIN_TYPES from '../../../typings/login-types'
-import NavHeader from "../../components/NavHeader";
+import NavHeader from "@/components/NavHeader";
 import { AxiosError } from "axios";
 
 
 type StateProps = ReturnType<typeof mapStateToProps>
-type DispatchProps = typeof actions
+// type DispatchProps = typeof actions
 interface Params {}
 type RouteProps = RouteComponentProps<Params>
 type Props = PropsWithChildren<StateProps & DispatchProps & RouteProps>
@@ -67,4 +67,4 @@ function Profile(props: Props) {
 }
 
 let mapStateToProps = (state: CombinedState): ProfileState => state.profile;
-export default connect(mapStateToProps, actions)(Profile);
+export default connect(mapStateToProps)(Profile);
