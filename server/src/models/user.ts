@@ -1,96 +1,72 @@
-import mongoose, {Schema, Model, Document, HookNextFunction } from 'mongoose'
-import validator from 'validator'
-import jwt from 'jsonwebtoken'
-import { UserPayload } from '../typins/jwt'
-import bcrypt from "bcryptjs" // 加|解 密
-
-/**
- * 创建文档对象接口
- */
+import mongoose, { Schema, Model, Document, HookNextFunction } from 'mongoose';
+import validator from 'validator';
+import jwt from 'jsonwebtoken';
+import { UserPayload } from '../typins/jwt';
+import bcrypt from 'bcryptjs';
 export interface IUserDocument extends Document {
-	username: string,
-	password: string,
-	email: string,
-	avatar: string,
-	generateToken: () => string,
-	_doc: IUserDocument
+    username: string,
+    password: string,
+    email: string;
+    avatar: string;
+    generateToken: () => string,
+    _doc: IUserDocument
 }
-
-
-/**
- * 创建集合
- *
- * @return  {[type]}  [return description]
- */
 const UserSchema: Schema<IUserDocument> = new Schema({
-	username: {
-		type: String,
-		required: [true, '用户名不能为空'],
-		minLength: [6, '最小长度不能少于6位'],
-		maxLength: [12, '最大长度不能大于12位']
-	},
-	password: String,
-	avatar: String,
-	email: {
-		type: String,
-		validate: {
-			validator: validator.isEmail
-		},
-		trim: true
-	}
-}, {
-	timestamps: true, toJSON: {
-		transform: function(_dox: any, result: any) {
-			result.id = result._id;
-			delete result._id;
-			delete result.__v;
-			delete result.password;
-			delete result.createdAt;
-			delete result.updatedAt;
-			return result
-		}
-	}
-})
+    username: {
+        type: String,
+        required: [true, '用户名不能为空'],
+        minlength: [4, '最小长度不能少于6位'],
+        maxlength: [12, '最大长度不能大于12位']
+    },
+    password: String,
+    avatar: String,
+    email: {
+        type: String,
+        validate: {
+            validator: validator.isEmail
+        },
+        trim: true,
+    }
+}, { timestamps: true ,toJSON: {
+      transform: function (_doc: any, result: any) {
+        result.id = result._id;
+        delete result._id;
+        delete result.__v;
+        delete result.password;
+        delete result.createdAt;
+        delete result.updatedAt;
+        return result;
+      },
+    },});
 
-/**
- * 获取文档
- *
- * @return  {string}  [return description]
- */
 UserSchema.methods.generateToken = function (): string {
-	let payload: UserPayload = ({id: this._id})
-	return jwt.sign(payload, process.env.JWT_SECRET_KEY!, { expiresIn: '1h'})
+    let payload: UserPayload = ({ id: this._id });
+    return jwt.sign(payload, process.env.JWT_SECRET_KEY!, { expiresIn: '1h' });
 }
-
-
 UserSchema.pre<IUserDocument>('save', async function (next: HookNextFunction) {
-	if (!this.isModified('password')) {
-		return next()
-	}
-	try {
-		this.password = await bcrypt.hash(this.password, 10);
-		next()
-	} catch (error) {
-		next(error)
-	}
-})
-
+    if (!this.isModified('password')) {
+        return next();
+    }
+    try {
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 UserSchema.static('login', async function (this: any, username: string, password: string): Promise<IUserDocument | null> {
-	let user: IUserDocument | null = await this.model('User').findOne({ username })
-	if (user) {
-		const matched = await bcrypt.compare(password, user.password);
-		if (matched) {
-			return user;
-		} else {
-			return null
-		}
-	}
-	return user;
-})
-
+    let user: IUserDocument | null = await this.model('User').findOne({ username });
+    if (user) {
+        const matched = await bcrypt.compare(password, user.password);
+        if (matched) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+    return user;
+});
 interface IUserModel<T extends Document> extends Model<T> {
-	login: (username: string, password: string) => IUserDocument | null
+    login: (username: string, password: string) => IUserDocument | null
 }
-
-
-export const User: IUserModel<IUserDocument> = mongoose.model<IUserDocument, IUserModel<IUserDocument>>('user', UserSchema)
+export const User: IUserModel<IUserDocument> = mongoose.model<IUserDocument, IUserModel<IUserDocument>>('User', UserSchema);

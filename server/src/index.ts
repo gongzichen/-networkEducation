@@ -41,23 +41,13 @@ app.use((_req: Request, _res: Response, next: NextFunction) => {
 
 app.use(errorMiddleware)
 
+
 const PORT: number = (process.env.PORT && parseInt(process.env.PORT)) || 8000;
-
-let connect = mongoose.createConnection( 'mongodb://localhost/27017', {
-	/* 使用新的url解析 */
-	'useNewUrlParser': true,
-	/* 新的服务器发现和监事引擎 */
-	'useUnifiedTopology': true
-})
-
-connect.on('open', () => {
-	console.log('mongodb连接成功')
-})
-
-connect.on('error', () => {
-	console.log('mongodb连接失败')
-})
-
-app.listen(PORT, ()=> {
-	console.log(`Running on http://localhost:${PORT}`)
-})
+(async function () {
+  mongoose.set("useNewUrlParser", true); /* 使用新的url解析 */
+  mongoose.set("useUnifiedTopology", true); 	/* 新的服务器发现和监事引擎 */
+  await mongoose.connect(`mongodb://localhost/cgong`);
+  app.listen(PORT, () => {
+    console.log(`Running on http://localhost:${PORT}`);
+  });
+})();

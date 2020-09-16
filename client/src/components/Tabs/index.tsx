@@ -8,7 +8,7 @@ function Tabs() {
 		<footer>
 			<NavLink exact to="/"><HomeOutlined /> <span>首页</span> </NavLink>
 			<NavLink to="/cart"> <ShoppingCartOutlined /> <span>购物车</span> </NavLink>
-			<NavLink to="/mine"> <UserOutlined/> <span>个人中心</span> </NavLink>
+			<NavLink to="/profile"> <UserOutlined/> <span>个人中心</span> </NavLink>
 		</footer>
 	)
 }
