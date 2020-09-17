@@ -10,7 +10,8 @@ import Tabs from '@/components/Tabs'
 import Home from '@/routes/Home';
 import Mine from '@/routes/Mine';
 import Profile from '@/routes/Profile';
-import login from '@/routes/Login';
+import Login from '@/routes/Login';
+import Register from '@/routes/Register';
 // import Detail from './routes/Detail'; // 详情
 // import Cart from '@/routes/Cart'; // 购物车
 // import { PersistGate } from "redux-persist/integration/react";
@@ -28,7 +29,8 @@ ReactDom.render(
               <Route path="/" exact component={Home} />
               <Route path="/mine" component={Mine} />
               <Route path="/profile" component={Profile} />
-              <Route path="/login" component={login} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
               {/* <Route path="/detail/:id" component={Detail} /> */}
               {/* <Route path="/cart" component={Cart} /> */}
               <Redirect to="/" />

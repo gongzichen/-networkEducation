@@ -21,7 +21,7 @@ export default function (
 ): ProfilState {
   switch (action.type) {
     case TYPES.VALIDATE: 
-      if (action.play.success) {
+      if (action.play && action.play.success) {
         // 用户已经登入
         return {
           ...state,
@@ -37,6 +37,14 @@ export default function (
           error: action.payload, // 错误对象赋值
         }
       }
+    case TYPES.LOGOUT:
+      return {
+        ...state,
+          loginState: LOGIN_TYPES.UN_VALIDATE,
+          user: null,
+      }
+    case TYPES.CHANGE_AVATAR:
+      return { ...state, user: { ...state.user, avatar: action.payload } };
     default:
       return state;
   }
