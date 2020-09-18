@@ -7,3 +7,5 @@ export const VALIDATE = 'VALIDATE'
 export const LOGOUT = 'LOGOUT'
 
 export const CHANGE_AVATAR = 'CHANGE_AVATAR'
+
+export const GET_SLIDERS = "GET_SLIDERS";
