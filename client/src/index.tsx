@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux'; 
-import store from  './store'; 
+import { store, persistor }  from  './store'; 
 import { ConfigProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import '@/assets/css/common.less';
@@ -13,15 +13,15 @@ import Profile from '@/routes/Profile';
 import Login from '@/routes/Login';
 import Register from '@/routes/Register';
 import Detail from './routes/Detail'; // 详情
-// import Cart from '@/routes/Cart'; // 购物车
-// import { PersistGate } from "redux-persist/integration/react";
+import Cart from '@/routes/Cart'; // 购物车
+import { PersistGate } from "redux-persist/integration/react";
 import { ConnectedRouter } from 'connected-react-router' // redux 绑定路由
 import history from './store/history'
 import 'lib-flexible'
 
 ReactDom.render(
   <Provider store={store}>
-    {/* <PersistGate loading={null} presistor={PersistGate}> */}
+    <PersistGate  loading={null} persistor={persistor}>
       <ConnectedRouter history={history}>
         <ConfigProvider locale={zh_CN}>
           <main className="main-container">
@@ -32,14 +32,14 @@ ReactDom.render(
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/detail/:id" component={Detail} />
-              {/* <Route path="/cart" component={Cart} /> */}
+              <Route path="/cart" component={Cart} />
               <Redirect to="/" />
             </Switch>
           </main>
           <Tabs />
         </ConfigProvider>
       </ConnectedRouter>
-    {/* </PersistGate> */}
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
