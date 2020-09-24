@@ -1,12 +1,10 @@
-import Lesson from './lesson'
+import Lesson from "./Lesson";
 export interface CartItem {
-	lesson: Lesson,
-	count: number,
-	checked: boolean
+  lesson: Lesson;
+  count: number;
+  checked: boolean;
 }
 
-export interface CartState {
-	
-}
+export interface CartState {}
 
-export type CartItem = CartItem[]
+export type CartItem = CartItem[];
